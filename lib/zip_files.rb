@@ -21,9 +21,9 @@ class ZipFiles
 
 	def process_zip_files
 		@zip_extensions.each do |extension|
-			current_zip = ZipFile.new({zip_file_path: extension, base_url: self.url })
-			current_zip.download_file
-			current_zip.process_file
+			current_zip = ZipFile.new( { zip_file_path: extension, base_url: self.url } )
+			current_zip.download_zip_file
+			current_zip.unzip_and_publish_content
 		end
 	end
 end

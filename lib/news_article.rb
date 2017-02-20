@@ -9,14 +9,11 @@ class NewsArticle
 	end
 
 	def publish 
-		if self.not_yet_published?
-			$redis.set(filename, content)
-			$redis.publish(channel, $redis.get(filename))
-		end
+		$redis.hset(channel, filename, content) if self.not_yet_published?
 	end
 
 	def not_yet_published?
-		!$redis.exists(self.filename)
+		!$redis.hexists(self.channel, self.filename)
 	end
 
 end

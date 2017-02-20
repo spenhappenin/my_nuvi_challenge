@@ -8,17 +8,8 @@ class ZipFile
 		@base_url = params[:base_url]
 	end
 
-	def download_file
-		self.download_zip_file
-	end
-
-	def process_file
-		self.unzip_and_publish_content
-	end
-
 	def download_zip_file
 		puts "Downloading..."
-		
 		zipfile = File.new("tmp/#{self.zip_file_path}", "w")
 		zipfile.write(HTTParty.get(download_url(self.zip_file_path)).body)
 		zipfile.close
